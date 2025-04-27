@@ -1,4 +1,3 @@
-
 // Game state
 let state = {
   flicks: 0,
@@ -61,12 +60,15 @@ function animate() {
   position.y += velocity.y;
 
   // Check boundaries
+  const shopButtonRect = shopButton.getBoundingClientRect();
+  const gameAreaRect = gameArea.getBoundingClientRect();
+
   if (position.x < 0) {
     position.x = 0;
     velocity.x = -velocity.x * 0.7;
     ball.classList.add('bounce');
-  } else if (position.x > gameArea.clientWidth - ball.clientWidth) {
-    position.x = gameArea.clientWidth - ball.clientWidth;
+  } else if (position.x > gameAreaRect.width - ball.clientWidth - shopButtonRect.width) {
+    position.x = gameAreaRect.width - ball.clientWidth - shopButtonRect.width;
     velocity.x = -velocity.x * 0.7;
     ball.classList.add('bounce');
   }
@@ -75,8 +77,8 @@ function animate() {
     position.y = 0;
     velocity.y = -velocity.y * 0.7;
     ball.classList.add('bounce');
-  } else if (position.y > gameArea.clientHeight - ball.clientHeight) {
-    position.y = gameArea.clientHeight - ball.clientHeight;
+  } else if (position.y > gameAreaRect.height - ball.clientHeight) {
+    position.y = gameAreaRect.height - ball.clientHeight;
     velocity.y = -velocity.y * 0.7;
     ball.classList.add('bounce');
   }
@@ -96,14 +98,11 @@ function animate() {
 function updateGameState() {
   // Update score display
   scoreValue.textContent = state.flicks;
-  console.log('Score updated:', scoreValue.textContent);
 
   // Calculate progress based on current flicks
   const progress = ((state.flicks - state.currentMilestone) / 
     (state.nextMilestone - state.currentMilestone)) * 100;
   
-  // Ensure progress is being calculated and updated correctly
-  console.log('Progress:', progress);
   progressFill.style.width = `${Math.min(100, progress)}%`; // Limit to 100%
 
   // Check if new skins are unlocked based on flicks
@@ -124,7 +123,6 @@ function updateGameState() {
     document.querySelectorAll('.milestone-text')[1].textContent = state.nextMilestone;
   }
 }
-
 
 // Event Handlers
 function handleStart(event) {
@@ -150,7 +148,7 @@ function handleMove(event) {
   const gameArea = document.getElementById('game-area');
   
   position = {
-    x: Math.max(0, Math.min(gameArea.clientWidth - ball.clientWidth,
+    x: Math.max(0, Math.min(gameArea.clientWidth - ball.clientWidth - shopButton.clientWidth,
       touch.clientX - startPos.x)),
     y: Math.max(0, Math.min(gameArea.clientHeight - ball.clientHeight,
       touch.clientY - startPos.y))
@@ -158,6 +156,7 @@ function handleMove(event) {
   
   updateBallPosition();
 }
+
 function handleEnd(event) {
   if (!isDragging || state.showShop || state.showHelp) return;
 
@@ -181,9 +180,6 @@ function handleEnd(event) {
     // Increment flick count as soon as the flick is registered
     state.flicks++;
 
-    // Log the flick count for debugging
-    console.log('Flick count:', state.flicks);
-
     // Update game state (score and progress bar)
     updateGameState();
     
@@ -191,6 +187,7 @@ function handleEnd(event) {
     animate();
   }
 }
+
 
 
 
