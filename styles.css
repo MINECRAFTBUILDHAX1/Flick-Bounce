@@ -1,0 +1,305 @@
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  position: fixed;
+}
+
+#game-area {
+  width: 100%;
+  height: 100vh;
+  background-color: #f9fafb;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Score Display */
+.score-display {
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 10rem;
+  text-align: center;
+}
+
+.score-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.score-value {
+  font-size: 2.25rem;
+  font-weight: 700;
+}
+
+/* Progress Bar */
+.progress-container {
+  position: absolute;
+  top: 5rem;
+  left: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.milestone {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #d1d5db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.milestone-text {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.progress-bar {
+  flex-grow: 1;
+  height: 0.5rem;
+  background: #e5e7eb;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #111827;
+  transition: width 0.5s ease-out;
+}
+
+/* Ball */
+#ball {
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: #222;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: grab;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  touch-action: none;
+  transition: transform 0.3s ease;
+}
+
+#ball.grabbing {
+  cursor: grabbing;
+}
+
+#ball.bounce {
+  animation: bounce 0.3s ease;
+}
+
+/* Shop Button */
+#shop-button {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: #111827;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 40;
+  transition: background-color 0.2s;
+}
+
+#shop-button:hover {
+  background: #374151;
+}
+
+/* Help Button */
+#help-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.875rem;
+  transition: background-color 0.2s;
+}
+
+#help-button:hover {
+  background: #d1d5db;
+}
+
+/* Modal Styles */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 50;
+}
+
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  width: 90%;
+  max-width: 20rem;
+  max-height: 80vh;
+  z-index: 51;
+  animation: pop 0.3s ease;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.modal-header h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  font-size: 1.25rem;
+}
+
+.close-button:hover {
+  color: #374151;
+}
+
+/* Shop Grid */
+.skins-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  overflow-y: auto;
+  max-height: 60vh;
+  padding-right: 1rem;
+}
+
+.skin-item {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 2px solid #e5e7eb;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.skin-item.active {
+  border-color: #111827;
+}
+
+.skin-item.locked {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.skin-item:not(.locked):hover {
+  background: #f3f4f6;
+}
+
+.skin-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: #111827;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto 0.5rem;
+}
+
+.skin-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.skin-requirement {
+  font-size: 0.75rem;
+  color: #6b7280;
+  text-align: center;
+  margin-top: 0.25rem;
+}
+
+/* Help Content */
+.help-content {
+  overflow-y: auto;
+  max-height: 60vh;
+}
+
+.help-section {
+  margin-bottom: 1rem;
+}
+
+.help-section h3 {
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.help-section p {
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.help-section ul {
+  list-style-position: inside;
+  font-size: 0.875rem;
+  color: #374151;
+  padding-left: 1rem;
+}
+
+/* Animations */
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes pop {
+  0% { transform: translate(-50%, -50%) scale(0.95); opacity: 0; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+/* Hide elements */
+.hidden {
+  display: none;
+}

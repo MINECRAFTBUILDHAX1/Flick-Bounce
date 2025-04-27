@@ -1,26 +1,98 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>flick-ball-dash</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
-
-    <meta property="og:title" content="flick-ball-dash" />
-    <meta property="og:description" content="Lovable Generated Project" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <title>Flick Ball Game</title>
+    <link rel="stylesheet" href="styles.css">
   </head>
-
   <body>
-    <div id="root"></div>
+    <div id="game-area">
+      <!-- Score Display -->
+      <div class="score-display">
+        <p class="score-label">FLICKS</p>
+        <h1 class="score-value">0</h1>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-container">
+        <div class="milestone">
+          <span class="milestone-text">0</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+        <div class="milestone">
+          <span class="milestone-text">100</span>
+        </div>
+      </div>
+
+      <!-- Ball -->
+      <div id="ball">⚽</div>
+
+      <!-- Shop Button -->
+      <div id="shop-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+          <path d="M3 6h18"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+      </div>
+
+      <!-- Shop Modal -->
+      <div id="shop-modal" class="hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Ball Skins</h2>
+            <button class="close-button">✕</button>
+          </div>
+          <div class="skins-grid">
+            <!-- Skins will be added here by JavaScript -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Help Button -->
+      <div id="help-button">?</div>
+
+      <!-- Help Modal -->
+      <div id="help-modal" class="hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>How to Play</h2>
+            <button class="close-button">✕</button>
+          </div>
+          <div class="help-content">
+            <div class="help-section">
+              <h3>Flicking the Ball</h3>
+              <p>Drag and release the ball to flick it. The speed and direction of your flick determines how the ball moves.</p>
+            </div>
+            <div class="help-section">
+              <h3>Flicks & Milestones</h3>
+              <p>Each time you flick the ball, your score increases. Reach milestones to unlock new ball skins.</p>
+            </div>
+            <div class="help-section">
+              <h3>Ball Skins</h3>
+              <p>Click the hanger icon to open the skin shop. New skins unlock as you reach certain milestones.</p>
+            </div>
+            <div class="help-section">
+              <h3>Tips</h3>
+              <ul>
+                <li>The ball will bounce off the edges</li>
+                <li>Flick harder for more speed</li>
+                <li>Try to reach 1000 flicks to unlock all skins</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    <script type="module" src="/src/main.tsx"></script>
+    <script src="game.js"></script>
   </body>
 </html>
