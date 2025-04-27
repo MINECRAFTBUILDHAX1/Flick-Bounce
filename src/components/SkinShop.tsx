@@ -2,7 +2,7 @@
 import React from 'react';
 import { useGame } from '../context/GameContext';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Hanger } from 'lucide-react';
+import { ShoppingBag } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
 
 const SkinShop: React.FC = () => {
@@ -25,7 +25,7 @@ const SkinShop: React.FC = () => {
           hover:bg-gray-800 transition-colors z-40"
         onClick={() => setShowShop(true)}
       >
-        <Hanger className="w-6 h-6" />
+        <ShoppingBag className="w-6 h-6" />
       </div>
 
       {/* Shop modal */}
