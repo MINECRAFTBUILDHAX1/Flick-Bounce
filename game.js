@@ -158,7 +158,6 @@ function handleMove(event) {
   
   updateBallPosition();
 }
-
 function handleEnd(event) {
   if (!isDragging || state.showShop || state.showHelp) return;
 
@@ -179,19 +178,20 @@ function handleEnd(event) {
       y: dy * 0.2
     };
 
-    // Increment flicks
+    // Increment flick count as soon as the flick is registered
     state.flicks++;
 
-    // Log to check if the flicks are updating
+    // Log the flick count for debugging
     console.log('Flick count:', state.flicks);
 
-    // Update the game state after each flick
+    // Update game state (score and progress bar)
     updateGameState();
     
-    // Start the ball animation
+    // Start ball animation
     animate();
   }
 }
+
 
 
 // Shop functions
