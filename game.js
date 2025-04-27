@@ -172,8 +172,14 @@ function handleEnd(event) {
       x: dx * 0.2,
       y: dy * 0.2
     };
+
+    // Increment flicks
     state.flicks++;
+    
+    // Update the game state after each flick
     updateGameState();
+    
+    // Start the ball animation
     animate();
   }
 }
