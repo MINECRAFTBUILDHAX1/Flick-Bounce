@@ -2,7 +2,7 @@
   "name": "Flick Ball Game",
   "short_name": "Flick Ball",
   "description": "A fun flick ball game",
-  "start_url": "/index.html",
+  "start_url": "/flick-frenzy/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ff6347",
