@@ -93,10 +93,9 @@ function animate() {
   requestAnimationFrame(animate);
 }
 
-// Update game state
 function updateGameState() {
   // Update score display
-  scoreValue.textContent = state.flicks;
+  scoreValue.textContent = state.flicks; // This should update the score on the UI
 
   // Update progress bar
   const progress = ((state.flicks - state.currentMilestone) /
@@ -119,6 +118,7 @@ function updateGameState() {
     document.querySelectorAll('.milestone-text')[1].textContent = state.nextMilestone;
   }
 }
+
 
 // Event Handlers
 function handleStart(event) {
