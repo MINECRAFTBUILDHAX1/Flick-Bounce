@@ -53,7 +53,7 @@ function animate() {
   if (velocity.x === 0 && velocity.y === 0) return;
 
   const gameArea = document.getElementById('game-area');
-  const friction = 0.95;
+  const friction = 0.98;
 
   // Update position
   position.x += velocity.x;
@@ -167,16 +167,22 @@ function handleEnd(event) {
   const ballRect = ball.getBoundingClientRect();
   const endX = touch.clientX - ballRect.left;
   const endY = touch.clientY - ballRect.top;
-  
+
   const dx = endX - startPos.x;
   const dy = endY - startPos.y;
 
   // Apply a smaller multiplier to make the flick feel smoother and more responsive
+  const flickMultiplier = 0.02; // Smaller multiplier for smoother flick
   if (Math.abs(dx) > 2 || Math.abs(dy) > 2) {
     velocity = {
-      x: dx * 0.05,  // Smaller multiplier for smoother flick
-      y: dy * 0.05   // Smaller multiplier for smoother flick
+      x: dx * flickMultiplier,  // Reduced multiplier
+      y: dy * flickMultiplier   // Reduced multiplier
     };
+
+    // Limit the max velocity to prevent the ball from moving too fast
+    const maxVelocity = 5;  // Max speed, can be adjusted for smoother results
+    velocity.x = Math.max(Math.min(velocity.x, maxVelocity), -maxVelocity);
+    velocity.y = Math.max(Math.min(velocity.y, maxVelocity), -maxVelocity);
 
     // Increment flick count
     state.flicks++;
@@ -189,11 +195,12 @@ function handleEnd(event) {
 
     // Update game state (score and progress bar)
     updateGameState();
-    
+
     // Start ball animation
     animate();
   }
 }
+
 
 
 
