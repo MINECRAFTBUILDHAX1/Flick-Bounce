@@ -7,7 +7,7 @@
   padding: 0;
 }
 
-/* Ensure the game area takes full viewport */
+/* Ensure the game area takes full viewport and handles touch events properly */
 body, html {
   margin: 0;
   padding: 0;
@@ -19,4 +19,10 @@ body, html {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+/* Prevent elastic scrolling on iOS */
+body {
+  position: fixed;
+  width: 100%;
 }
