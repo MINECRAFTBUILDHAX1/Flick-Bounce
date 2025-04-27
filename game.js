@@ -167,27 +167,34 @@ function handleEnd(event) {
   const ballRect = ball.getBoundingClientRect();
   const endX = touch.clientX - ballRect.left;
   const endY = touch.clientY - ballRect.top;
-
-  // Directly register the flick regardless of distance
+  
   const dx = endX - startPos.x;
   const dy = endY - startPos.y;
 
-  // Assign velocity immediately after the flick (no threshold check)
-  velocity = {
-    x: dx * 0.2,
-    y: dy * 0.2
-  };
+  // Apply a smaller multiplier to make the flick feel smoother and more responsive
+  if (Math.abs(dx) > 2 || Math.abs(dy) > 2) {
+    velocity = {
+      x: dx * 0.05,  // Smaller multiplier for smoother flick
+      y: dy * 0.05   // Smaller multiplier for smoother flick
+    };
 
-  // Increment flick count as soon as the flick is registered
-  state.flicks++;  // Increment the flick count
-  console.log('Flick count:', state.flicks);  // Log for debugging
+    // Increment flick count
+    state.flicks++;
 
-  // Update game state (score and progress bar)
-  updateGameState();
+    // Save flick count to localStorage
+    localStorage.setItem('flickCount', state.flicks);
 
-  // Start ball animation
-  animate();
+    // Log the flick count for debugging
+    console.log('Flick count:', state.flicks);
+
+    // Update game state (score and progress bar)
+    updateGameState();
+    
+    // Start ball animation
+    animate();
+  }
 }
+
 
 
 
@@ -278,3 +285,19 @@ initBall();
 ball.textContent = state.skins[0].icon;
 console.log(scoreValue); // Should log the score element
 console.log(progressFill); // Should log the progress bar element
+// When the page loads, retrieve the flick count from localStorage
+window.addEventListener('load', () => {
+  // Check if there's a stored flick count in localStorage
+  const storedFlickCount = localStorage.getItem('flickCount');
+
+  // If a flick count is found, restore it
+  if (storedFlickCount) {
+    state.flicks = parseInt(storedFlickCount, 10);
+    console.log('Restored flick count:', state.flicks);
+  } else {
+    state.flicks = 0; // Set to 0 if no flick count is found
+  }
+
+  // Optionally, update the display immediately
+  updateGameState();
+});
