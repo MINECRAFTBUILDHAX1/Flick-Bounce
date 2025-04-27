@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -84,11 +85,38 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'ball-bounce': {
+					'0%, 100%': { transform: 'scale(1)' },
+					'50%': { transform: 'scale(0.95)' }
+				},
+				'ball-flick': {
+					'0%': { transform: 'scale(0.9)' },
+					'50%': { transform: 'scale(1.05)' },
+					'100%': { transform: 'scale(1)' }
+				},
+				'pulse-fade': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.7' }
+				},
+				'pop': {
+					'0%': { transform: 'scale(0.95)', opacity: '0' },
+					'70%': { transform: 'scale(1.05)' },
+					'100%': { transform: 'scale(1)', opacity: '1' }
+				},
+				'fade-in': {
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'ball-bounce': 'ball-bounce 0.6s ease-in-out',
+				'ball-flick': 'ball-flick 0.3s ease-out',
+				'pulse-fade': 'pulse-fade 2s ease-in-out infinite',
+				'pop': 'pop 0.3s ease-out',
+				'fade-in': 'fade-in 0.3s ease-out'
 			}
 		}
 	},
