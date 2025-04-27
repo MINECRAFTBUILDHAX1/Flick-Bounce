@@ -167,26 +167,28 @@ function handleEnd(event) {
   const ballRect = ball.getBoundingClientRect();
   const endX = touch.clientX - ballRect.left;
   const endY = touch.clientY - ballRect.top;
-  
+
+  // Directly register the flick regardless of distance
   const dx = endX - startPos.x;
   const dy = endY - startPos.y;
-  
-  if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
-    velocity = {
-      x: dx * 0.2,
-      y: dy * 0.2
-    };
 
-    // Increment flick count as soon as the flick is registered
-    state.flicks++;
+  // Assign velocity immediately after the flick (no threshold check)
+  velocity = {
+    x: dx * 0.2,
+    y: dy * 0.2
+  };
 
-    // Update game state (score and progress bar)
-    updateGameState();
-    
-    // Start ball animation
-    animate();
-  }
+  // Increment flick count as soon as the flick is registered
+  state.flicks++;  // Increment the flick count
+  console.log('Flick count:', state.flicks);  // Log for debugging
+
+  // Update game state (score and progress bar)
+  updateGameState();
+
+  // Start ball animation
+  animate();
 }
+
 
 
 
