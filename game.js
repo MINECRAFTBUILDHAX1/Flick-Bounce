@@ -95,14 +95,18 @@ function animate() {
 
 function updateGameState() {
   // Update score display
-  scoreValue.textContent = state.flicks; // This should update the score on the UI
+  scoreValue.textContent = state.flicks;
+  console.log('Score updated:', scoreValue.textContent);
 
-  // Update progress bar
-  const progress = ((state.flicks - state.currentMilestone) /
+  // Calculate progress based on current flicks
+  const progress = ((state.flicks - state.currentMilestone) / 
     (state.nextMilestone - state.currentMilestone)) * 100;
-  progressFill.style.width = `${Math.min(100, progress)}%`;
+  
+  // Ensure progress is being calculated and updated correctly
+  console.log('Progress:', progress);
+  progressFill.style.width = `${Math.min(100, progress)}%`; // Limit to 100%
 
-  // Check for unlocked skins
+  // Check if new skins are unlocked based on flicks
   state.skins.forEach(skin => {
     if (!skin.unlocked && skin.requiredFlicks <= state.flicks) {
       skin.unlocked = true;
@@ -110,10 +114,12 @@ function updateGameState() {
     }
   });
 
-  // Update milestone values
+  // Update milestones and progress bar values
   if (state.flicks >= state.nextMilestone) {
     state.currentMilestone = state.nextMilestone;
     state.nextMilestone += 100;
+
+    // Update milestone text
     document.querySelector('.milestone-text').textContent = state.currentMilestone;
     document.querySelectorAll('.milestone-text')[1].textContent = state.nextMilestone;
   }
@@ -175,7 +181,10 @@ function handleEnd(event) {
 
     // Increment flicks
     state.flicks++;
-    
+
+    // Log to check if the flicks are updating
+    console.log('Flick count:', state.flicks);
+
     // Update the game state after each flick
     updateGameState();
     
@@ -183,6 +192,7 @@ function handleEnd(event) {
     animate();
   }
 }
+
 
 // Shop functions
 function renderShop() {
@@ -267,3 +277,5 @@ document.addEventListener('touchmove', (e) => {
 // Initialize
 initBall();
 ball.textContent = state.skins[0].icon;
+console.log(scoreValue); // Should log the score element
+console.log(progressFill); // Should log the progress bar element
