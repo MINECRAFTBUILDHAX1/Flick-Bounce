@@ -84,13 +84,25 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [activeSkin, setActiveSkin] = useState<string>('default');
   const [ballPosition, setBallPosition] = useState<{ x: number, y: number }>({ x: 0, y: 0 });
   
-  // Initial skins
+  // Extended skins list
   const [skins, setSkins] = useState<Skin[]>([
     { id: 'default', name: 'Classic', icon: '◯', unlocked: true },
     { id: 'dotted', name: 'Dotted', icon: '⦿', unlocked: false, requiredFlicks: 10 },
     { id: 'bullseye', name: 'Bullseye', icon: '◎', unlocked: false, requiredFlicks: 25 },
     { id: 'checkered', name: 'Checkered', icon: '◍', unlocked: false, requiredFlicks: 50 },
     { id: 'spiral', name: 'Spiral', icon: '◌', unlocked: false, requiredFlicks: 100 },
+    { id: 'star', name: 'Star', icon: '✧', unlocked: false, requiredFlicks: 250 },
+    { id: 'double', name: 'Double Ring', icon: '⚆', unlocked: false, requiredFlicks: 500 },
+    { id: 'triple', name: 'Triple Ring', icon: '◉', unlocked: false, requiredFlicks: 1000 },
+    { id: 'diamond', name: 'Diamond', icon: '◈', unlocked: false, requiredFlicks: 2500 },
+    { id: 'flower', name: 'Flower', icon: '✾', unlocked: false, requiredFlicks: 5000 },
+    { id: 'void', name: 'Void', icon: '◐', unlocked: false, requiredFlicks: 10000 },
+    { id: 'eclipse', name: 'Eclipse', icon: '◑', unlocked: false, requiredFlicks: 25000 },
+    { id: 'cosmos', name: 'Cosmos', icon: '◬', unlocked: false, requiredFlicks: 50000 },
+    { id: 'infinity', name: 'Infinity', icon: '◊', unlocked: false, requiredFlicks: 100000 },
+    { id: 'quantum', name: 'Quantum', icon: '◫', unlocked: false, requiredFlicks: 250000 },
+    { id: 'legendary', name: 'Legendary', icon: '◭', unlocked: false, requiredFlicks: 500000 },
+    { id: 'mythical', name: 'Mythical', icon: '⬡', unlocked: false, requiredFlicks: 1000000 },
   ]);
   
   // Calculate current milestone based on flicks
