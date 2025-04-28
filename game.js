@@ -130,15 +130,12 @@ function updateGameState() {
     // Optional: You can trigger some celebratory event here (visual cue or sound)
     alert(`Milestone Reached: ${state.currentMilestone}! 🎉`);
   }
-
-  // Check for unlocking skins based on flicks
-  state.skins.forEach(skin => {
-    if (!skin.unlocked && state.flicks >= skin.requiredFlicks) {
-      skin.unlocked = true;
-      console.log(`${skin.name} unlocked!`);
-      renderShop(); // Refresh shop to show the unlocked skin
-    }
-  });
+for (const skin of state.skins) {
+  if (!skin.unlocked && state.flicks >= skin.requiredFlicks) {
+    skin.unlocked = true;
+    state.activeSkin = skin.id; // 🔥 AUTO EQUIP IMMEDIATELY
+    console.log(`Switched to ${skin.name}!`);
+  }
 }
 
 function playMilestoneSound() {
