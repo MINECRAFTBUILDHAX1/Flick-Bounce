@@ -219,6 +219,10 @@ function handleEnd(event) {
 }
 
 
+function updateBallSkin() {
+  const ball = document.getElementById('ball');
+  ball.src = state.skins[state.activeSkin].image;
+}
 
 
 
