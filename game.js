@@ -121,38 +121,23 @@ function updateGameState() {
   // Update milestones and progress bar values
   if (state.flicks >= state.nextMilestone) {
     state.currentMilestone = state.nextMilestone;
-    state.nextMilestone += 100;  // You can adjust the milestone gap here
+    state.nextMilestone += 100;
 
     // Update milestone text
     document.querySelector('.milestone-text').textContent = state.currentMilestone;
     document.querySelectorAll('.milestone-text')[1].textContent = state.nextMilestone;
-
   }
-for (const skin of state.skins) {
-  if (!skin.unlocked && state.flicks >= skin.requiredFlicks) {
-    skin.unlocked = true;
-    state.activeSkin = skin.id; // 🔥 AUTO EQUIP IMMEDIATELY
-    console.log(`Switched to ${skin.name}!`);
-  }
-}
-    saveGameState(); // 🛟 save after unlocking
-  render();        // 🎨 re-draw after unlocking
+
+  // Check for unlocking skins based on flicks
+  state.skins.forEach(skin => {
+    if (!skin.unlocked && state.flicks >= skin.requiredFlicks) {
+      skin.unlocked = true;
+      console.log(`${skin.name} unlocked!`);
+      renderShop(); // Refresh shop to show the unlocked skin
+    }
+  });
 }
 
-function playMilestoneSound() {
-  const audio = new Audio('milestone-sound.mp3');  // Add your sound file
-  audio.play();
-}
-
-// In the updateGameState function:
-if (state.flicks >= state.nextMilestone) {
-  state.currentMilestone = state.nextMilestone;
-  state.nextMilestone += 100;
-  
-  // Play sound and show alert
-  playMilestoneSound();
-  
-}
 
 // Event Handlers
 function handleStart(event) {
