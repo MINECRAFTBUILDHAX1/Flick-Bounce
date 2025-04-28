@@ -127,7 +127,7 @@ function updateGameState() {
     document.querySelector('.milestone-text').textContent = state.currentMilestone;
     document.querySelectorAll('.milestone-text')[1].textContent = state.nextMilestone;
 
-  
+  }
 for (const skin of state.skins) {
   if (!skin.unlocked && state.flicks >= skin.requiredFlicks) {
     skin.unlocked = true;
