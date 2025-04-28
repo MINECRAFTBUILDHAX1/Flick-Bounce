@@ -203,24 +203,18 @@ body {
 }
 
 /* Shop Grid */
+/* Shop Grid */
 .skins-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.75rem;
-  overflow-y: auto;
-  max-height: 60vh;
+  max-height: 300px; /* Keep the height the same for both mobile and desktop */
+  overflow-y: auto; /* This is necessary to enable scrolling */
+  -webkit-overflow-scrolling: touch; /* Enables smooth scrolling on mobile */
   padding-right: 1rem;
-  max-height: 300px;
-  overflow-y: auto;
 }
-@media (max-width: 768px) {
-  .skins-grid {
-    grid-template-columns: 1fr; /* 1 column for mobile screens */
-    padding-right: 0.5rem; /* Adjust padding for smaller screens */
-    max-height: 200px; /* You can adjust this value to fit mobile better */
-    overflow-y: scroll; /* Explicitly set scrolling */
-  }
-}
+
+
 .skin-item {
   padding: 0.75rem;
   border-radius: 0.5rem;
