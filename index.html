@@ -6,7 +6,6 @@
   <title>Flick Bounce</title>
   <link rel="icon" href="og-image.png">
   <link rel="manifest" href="/manifest.json">
-
   <style>
     /* Reset and base styles */
     * {
@@ -44,8 +43,8 @@
     }
 
     .app-logo {
-      width: 100px;
-      height: 100px;
+      width: 200px; /* Increased size */
+      height: 200px; /* Increased size */
       margin-bottom: 20px;
     }
 
@@ -75,10 +74,49 @@
       background-color: #374151;
     }
 
-    /* Animations */
-    @keyframes pop {
-      0% { transform: translate(-50%, -50%) scale(0.95); opacity: 0; }
-      100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    /* Instructions Popup */
+    .instructions-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      z-index: 1000;
+    }
+
+    .instructions-popup p {
+      margin-bottom: 15px;
+      font-size: 1.125rem;
+    }
+
+    .close-popup-btn {
+      background-color: #111827;
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 9999px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .close-popup-btn:hover {
+      background-color: #374151;
+    }
+
+    .popup-header {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .platform-instructions {
+      margin-bottom: 20px;
+      font-size: 1rem;
     }
   </style>
 </head>
@@ -93,39 +131,42 @@
     </div>
   </div>
 
+  <!-- Instructions Popup -->
+  <div class="instructions-popup" id="instructions-popup">
+    <p class="popup-header">How to Add to Home Screen</p>
+    
+    <div class="platform-instructions">
+      <h3>For iPhone:</h3>
+      <p>1. Tap the Share button (the square with an arrow pointing up) at the bottom of the screen.</p>
+      <p>2. Scroll down and select "Add to Home Screen".</p>
+      <p>3. Tap "Add" in the upper-right corner to add the app to your home screen.</p>
+    </div>
+    
+    <div class="platform-instructions">
+      <h3>For Android:</h3>
+      <p>1. Tap the menu button (three dots) in the top-right corner of the browser.</p>
+      <p>2. Select "Add to Home Screen" from the dropdown menu.</p>
+      <p>3. Tap "Add" to place the app on your home screen.</p>
+    </div>
+
+    <button class="close-popup-btn" id="close-popup-btn">Got it!</button>
+  </div>
+
   <script>
-    // Service Worker Registration for PWA (Progressive Web App)
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
-          .then(reg => console.log('Service Worker Registered:', reg))
-          .catch(err => console.log('Service Worker Registration Failed:', err));
-      });
-    }
-
     // Handle the "Add to Home Screen" behavior
-    let deferredPrompt;
     const addToHomeBtn = document.getElementById('add-to-home-btn');
+    const instructionsPopup = document.getElementById('instructions-popup');
+    const closePopupBtn = document.getElementById('close-popup-btn');
 
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      addToHomeBtn.style.display = 'block'; // Show the button
+    // When the "Add to Home Screen" button is clicked
+    addToHomeBtn.addEventListener('click', () => {
+      // Show the instructions popup
+      instructionsPopup.style.display = 'block';
     });
 
-    addToHomeBtn.addEventListener('click', (e) => {
-      // Trigger the prompt to install the app
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            console.log('User accepted the A2HS prompt');
-          } else {
-            console.log('User dismissed the A2HS prompt');
-          }
-          deferredPrompt = null;
-        });
-      }
+    // Close the instructions popup
+    closePopupBtn.addEventListener('click', () => {
+      instructionsPopup.style.display = 'none';
     });
   </script>
 </body>
