@@ -141,6 +141,20 @@ function updateGameState() {
   });
 }
 
+function playMilestoneSound() {
+  const audio = new Audio('milestone-sound.mp3');  // Add your sound file
+  audio.play();
+}
+
+// In the updateGameState function:
+if (state.flicks >= state.nextMilestone) {
+  state.currentMilestone = state.nextMilestone;
+  state.nextMilestone += 100;
+  
+  // Play sound and show alert
+  playMilestoneSound();
+  alert(`Milestone Reached: ${state.currentMilestone}! 🎉`);
+}
 
 // Event Handlers
 function handleStart(event) {
