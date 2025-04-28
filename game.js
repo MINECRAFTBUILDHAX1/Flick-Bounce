@@ -134,6 +134,7 @@ state.skins.forEach(skin => {
     skin.unlocked = true;
     state.activeSkin = skin.id; // 🚀 AUTO EQUIP
     console.log(`${skin.name} unlocked and equipped!`);
+    updateBallSkin(); // 🎯 REFRESH THE BALL SKIN
   }
 });
 
