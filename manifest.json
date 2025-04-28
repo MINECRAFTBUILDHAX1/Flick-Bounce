@@ -2,7 +2,7 @@
   "name": "Flick Bounce Game",
   "short_name": "Flick Bounce",
   "description": "A fun flick ball game",
-  "start_url": "/Flick-Bounce/",
+  "start_url": "/game.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ff6347",
