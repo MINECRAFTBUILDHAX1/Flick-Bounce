@@ -357,3 +357,23 @@ footer {
 .hidden {
   display: none;
 }
+@keyframes popAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2); /* Scale up */
+  }
+  100% {
+    transform: scale(1); /* Return to normal size */
+  }
+}
+
+#ball {
+  transition: transform 0.3s ease-in-out;
+}
+
+.pop {
+  animation: popAnimation 0.6s ease-out;
+}
+
