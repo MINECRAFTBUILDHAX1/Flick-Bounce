@@ -357,5 +357,4 @@ window.addEventListener('appinstalled', (event) => {
   addToHomeScreenButton.style.display = 'none';
 });
 
-  });
-});
+ 
