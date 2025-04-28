@@ -12,7 +12,20 @@ let state = {
     { id: 'heart', name: 'Heart', icon: '❤️', unlocked: false, requiredFlicks: 250 },
     { id: 'smile', name: 'Smile', icon: '😊', unlocked: false, requiredFlicks: 500 },
     { id: 'moon', name: 'Moon', icon: '🌙', unlocked: false, requiredFlicks: 750 },
-    { id: 'sun', name: 'Sun', icon: '☀️', unlocked: false, requiredFlicks: 1000 }
+    { id: 'sun', name: 'Sun', icon: '☀️', unlocked: false, requiredFlicks: 1000 },
+    { id: 'rocket', name: 'Rocket', icon: '🚀', unlocked: false, requiredFlicks: 2000 },
+  { id: 'gem', name: 'Gem', icon: '💎', unlocked: false, requiredFlicks: 3000 },
+  { id: 'rainbow', name: 'Rainbow', icon: '🌈', unlocked: false, requiredFlicks: 5000 },
+  { id: 'dragon', name: 'Dragon', icon: '🐉', unlocked: false, requiredFlicks: 10000 },
+  { id: 'unicorn', name: 'Unicorn', icon: '🦄', unlocked: false, requiredFlicks: 25000 },
+  { id: 'phoenix', name: 'Phoenix', icon: '🔥', unlocked: false, requiredFlicks: 50000 },
+  { id: 'galaxy', name: 'Galaxy', icon: '🌌', unlocked: false, requiredFlicks: 75000 },
+  { id: 'lion', name: 'Lion', icon: '🦁', unlocked: false, requiredFlicks: 100000 },
+  { id: 'butterfly', name: 'Butterfly', icon: '🦋', unlocked: false, requiredFlicks: 200000 },
+  { id: 'tiger', name: 'Tiger', icon: '🐅', unlocked: false, requiredFlicks: 300000 },
+  { id: 'knight', name: 'Knight', icon: '🛡️', unlocked: false, requiredFlicks: 500000 },
+  { id: 'golden_star', name: 'Golden Star', icon: '🌟', unlocked: false, requiredFlicks: 750000 },
+  { id: 'crown', name: 'Crown', icon: '👑', unlocked: false, requiredFlicks: 1000000 }
   ]
 };
 
