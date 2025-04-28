@@ -308,17 +308,8 @@ footer {
   padding: 10px;
 }
 
-/* Adjusted Container for the buttons above the footer */
-#button-container {
-  position: fixed;
-  bottom: 3.5rem; /* Adjusted to ensure it's above the footer */
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 1rem;
-  z-index: 100;
-}
+
+
 
 /* Support Button without the green box */
 /* Support Button without the green box */
