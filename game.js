@@ -118,8 +118,6 @@ function updateGameState() {
   
   progressFill.style.width = `${Math.min(100, progress)}%`; // Limit to 100%
 
-  
-
   // Update milestones and progress bar values
   if (state.flicks >= state.nextMilestone) {
     state.currentMilestone = state.nextMilestone;
@@ -129,7 +127,17 @@ function updateGameState() {
     document.querySelector('.milestone-text').textContent = state.currentMilestone;
     document.querySelectorAll('.milestone-text')[1].textContent = state.nextMilestone;
   }
+
+  // Check for unlocking skins based on flicks
+  state.skins.forEach(skin => {
+    if (!skin.unlocked && state.flicks >= skin.requiredFlicks) {
+      skin.unlocked = true;
+      console.log(`${skin.name} unlocked!`);
+      renderShop(); // Refresh shop to show the unlocked skin
+    }
+  });
 }
+
 
 // Event Handlers
 function handleStart(event) {
