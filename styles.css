@@ -20,7 +20,7 @@ body {
   background-color: #f9fafb;
   position: relative;
   overflow: hidden;
-  border-bottom: 2px solid #d1d5db; /* Adding a border just above the footer */
+  border-bottom: 2px solid #ff0ab4; /* Adding a border just above the footer */
 }
 
 /* Score Display */
