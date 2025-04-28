@@ -75,20 +75,22 @@
     }
 
     /* Instructions Popup */
-    .instructions-popup {
+.instructions-popup {
       display: none;
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       background-color: white;
-      padding: 20px;
+      padding: 30px;
+      width: 70%; /* Adjusted width to be wider */
+      max-width: 500px; /* Max width for larger screens */
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       text-align: center;
       z-index: 1000;
+      box-sizing: border-box; /* Ensures padding does not increase overall width */
     }
-
     .instructions-popup p {
       margin-bottom: 15px;
       font-size: 1.125rem;
@@ -114,9 +116,10 @@
       margin-bottom: 10px;
     }
 
-    .platform-instructions {
+  .platform-instructions {
       margin-bottom: 20px;
       font-size: 1rem;
+      text-align: left; /* Align the instructions to the left for better readability */
     }
   </style>
 </head>
