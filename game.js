@@ -1,3 +1,4 @@
+
 // Game state
 let state = {
   flicks: 0,
@@ -26,8 +27,8 @@ let state = {
   { id: 'knight', name: 'Knight', icon: '🛡️', unlocked: false, requiredFlicks: 500000 },
   { id: 'golden_star', name: 'Golden Star', icon: '🌟', unlocked: false, requiredFlicks: 750000 },
   { id: 'crown', name: 'Crown', icon: '👑', unlocked: false, requiredFlicks: 1000000 }
-]
-
+];
+};
 
 // DOM Elements
 const ball = document.getElementById('ball');
