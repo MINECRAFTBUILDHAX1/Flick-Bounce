@@ -112,25 +112,7 @@ body {
   animation: bounce 0.3s ease;
 }
 
-#shop-button {
-  position: fixed;
-  bottom: 3.5rem; /* Same height as the "Buy Me A Coffee" button */
-  right: 1rem; /* Adjust it to be on the right side */
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  background: #111827;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
 
-#shop-button:hover {
-  background: #374151;
-}
 
 /* Help Button */
 #help-button {
@@ -199,30 +181,6 @@ body {
 
 .close-button:hover {
   color: #374151;
-}
-.skins-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
-  max-height: 300px; /* You can adjust this to the height you want */
-  overflow-y: auto;  /* Allow vertical scrolling */
-  -webkit-overflow-scrolling: touch;  /* Smooth scrolling for iOS */
-  padding-right: 1rem;
-}
-
-
-/* For webkit browsers (Chrome, Safari, Edge) */
-.skins-grid::-webkit-scrollbar {
-  width: 8px;
-}
-
-.skins-grid::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 4px;
-}
-
-.skins-grid::-webkit-scrollbar-track {
-  background-color: transparent;
 }
 
 
@@ -322,10 +280,13 @@ footer {
 }
 
 /* Support Button without the green box */
+/* Support Button without the green box */
 .support-button {
   position: fixed;
   bottom: 3.5rem; /* Same as other buttons */
-  left: 0.5rem; /* Align the support button all the way to the left */
+  left: 0; /* Align the button to the left edge */
+  right: 0; /* Align the button to the right edge */
+  margin: 0 auto; /* Center the button horizontally */
   width: auto;
   padding: 10px 20px;
   background-color: transparent; /* Remove background color */
