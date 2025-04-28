@@ -135,6 +135,9 @@ for (const skin of state.skins) {
     console.log(`Switched to ${skin.name}!`);
   }
 }
+    saveGameState(); // 🛟 save after unlocking
+  render();        // 🎨 re-draw after unlocking
+}
 
 function playMilestoneSound() {
   const audio = new Audio('milestone-sound.mp3');  // Add your sound file
@@ -148,7 +151,7 @@ if (state.flicks >= state.nextMilestone) {
   
   // Play sound and show alert
   playMilestoneSound();
-  alert(`Milestone Reached: ${state.currentMilestone}! 🎉`);
+  
 }
 
 // Event Handlers
