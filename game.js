@@ -50,50 +50,53 @@ function updateBallPosition() {
 
 // Ball animation loop
 function animate() {
-  if (velocity.x === 0 && velocity.y === 0) return;
-
   const gameArea = document.getElementById('game-area');
   const friction = 0.98;
 
-  // Update position
-  position.x += velocity.x;
-  position.y += velocity.y;
+  if (velocity.x !== 0 || velocity.y !== 0) {
+    // Update position
+    position.x += velocity.x;
+    position.y += velocity.y;
 
-  // Check boundaries
-  const shopButtonRect = shopButton.getBoundingClientRect();
-  const gameAreaRect = gameArea.getBoundingClientRect();
+    // Check boundaries
+    const shopButtonRect = shopButton.getBoundingClientRect();
+    const gameAreaRect = gameArea.getBoundingClientRect();
 
-  if (position.x < 0) {
-    position.x = 0;
-    velocity.x = -velocity.x * 0.7;
-    ball.classList.add('bounce');
-  } else if (position.x > gameAreaRect.width - ball.clientWidth - shopButtonRect.width) {
-    position.x = gameAreaRect.width - ball.clientWidth - shopButtonRect.width;
-    velocity.x = -velocity.x * 0.7;
-    ball.classList.add('bounce');
+    if (position.x < 0) {
+      position.x = 0;
+      velocity.x = -velocity.x * 0.7;
+      ball.classList.add('bounce');
+    } else if (position.x > gameAreaRect.width - ball.clientWidth - shopButtonRect.width) {
+      position.x = gameAreaRect.width - ball.clientWidth - shopButtonRect.width;
+      velocity.x = -velocity.x * 0.7;
+      ball.classList.add('bounce');
+    }
+
+    if (position.y < 0) {
+      position.y = 0;
+      velocity.y = -velocity.y * 0.7;
+      ball.classList.add('bounce');
+    } else if (position.y > gameAreaRect.height - ball.clientHeight) {
+      position.y = gameAreaRect.height - ball.clientHeight;
+      velocity.y = -velocity.y * 0.7;
+      ball.classList.add('bounce');
+    }
+
+    // Apply friction
+    velocity.x *= friction;
+    velocity.y *= friction;
+
+    // Stop if velocity is very small
+    if (Math.abs(velocity.x) < 0.1) velocity.x = 0;
+    if (Math.abs(velocity.y) < 0.1) velocity.y = 0;
+
+    updateBallPosition();
   }
 
-  if (position.y < 0) {
-    position.y = 0;
-    velocity.y = -velocity.y * 0.7;
-    ball.classList.add('bounce');
-  } else if (position.y > gameAreaRect.height - ball.clientHeight) {
-    position.y = gameAreaRect.height - ball.clientHeight;
-    velocity.y = -velocity.y * 0.7;
-    ball.classList.add('bounce');
-  }
-
-  // Apply friction
-  velocity.x *= friction;
-  velocity.y *= friction;
-
-  // Stop if velocity is very small
-  if (Math.abs(velocity.x) < 0.1) velocity.x = 0;
-  if (Math.abs(velocity.y) < 0.1) velocity.y = 0;
-
-  updateBallPosition();
+  // 👇 Always keep animating even if no movement, so it catches new flicks immediately
   requestAnimationFrame(animate);
 }
+
 
 function updateGameState() {
   // Update score display
