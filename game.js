@@ -283,9 +283,12 @@ document.addEventListener('mouseup', handleEnd);
 document.addEventListener('touchend', handleEnd);
 
 shopButton.addEventListener('click', () => {
-  state.showShop = true;
-  shopModal.classList.remove('hidden');
-  renderShop();
+  // Check if the shop button is visible
+  if (shopButton.style.display !== 'none') {
+    state.showShop = true;
+    shopModal.classList.remove('hidden');
+    renderShop();
+  }
 });
 
 helpButton.addEventListener('click', () => {
