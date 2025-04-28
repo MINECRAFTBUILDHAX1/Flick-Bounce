@@ -174,35 +174,38 @@ function handleEnd(event) {
   const dx = endX - startPos.x;
   const dy = endY - startPos.y;
 
-  // Apply a smaller multiplier to make the flick feel smoother and more responsive
-  const flickMultiplier = 0.02; // Smaller multiplier for smoother flick
-  if (Math.abs(dx) > 2 || Math.abs(dy) > 2) {
+  // Use a softer multiplier for a smooth, casual swipe (not too fast needed)
+  const flickMultiplier = 0.03; // 🔥 Tiny boost for better feel
+
+  // Minimum distance to count as a flick (so taps don't move it randomly)
+  const minFlickDistance = 10; // 🎯 Small, but enough to not trigger by mistake
+
+  const distance = Math.sqrt(dx * dx + dy * dy);
+
+  if (distance > minFlickDistance) {
     velocity = {
-      x: dx * flickMultiplier,  // Reduced multiplier
-      y: dy * flickMultiplier   // Reduced multiplier
+      x: dx * flickMultiplier,
+      y: dy * flickMultiplier
     };
 
-    // Limit the max velocity to prevent the ball from moving too fast
-    const maxVelocity = 5;  // Max speed, can be adjusted for smoother results
+    // Limit max speed for better control
+    const maxVelocity = 6; // 🚀 Feels snappy but not chaotic
     velocity.x = Math.max(Math.min(velocity.x, maxVelocity), -maxVelocity);
     velocity.y = Math.max(Math.min(velocity.y, maxVelocity), -maxVelocity);
 
-    // Increment flick count
     state.flicks++;
 
-    // Save flick count to localStorage
+    // Save flicks to localStorage
     localStorage.setItem('flickCount', state.flicks);
 
-    // Log the flick count for debugging
-    console.log('Flick count:', state.flicks);
-
-    // Update game state (score and progress bar)
+    // Update UI
     updateGameState();
 
-    // Start ball animation
+    // Start animating
     animate();
   }
 }
+
 
 
 
