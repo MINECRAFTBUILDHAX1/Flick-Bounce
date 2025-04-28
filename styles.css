@@ -213,7 +213,14 @@ body {
   max-height: 300px;
   overflow-y: auto;
 }
-
+@media (max-width: 768px) {
+  .skins-grid {
+    grid-template-columns: 1fr; /* 1 column for mobile screens */
+    padding-right: 0.5rem; /* Adjust padding for smaller screens */
+    max-height: 200px; /* You can adjust this value to fit mobile better */
+    overflow-y: scroll; /* Explicitly set scrolling */
+  }
+}
 .skin-item {
   padding: 0.75rem;
   border-radius: 0.5rem;
