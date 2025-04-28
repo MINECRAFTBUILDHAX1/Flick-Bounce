@@ -313,7 +313,7 @@ footer {
 .support-button {
   position: fixed;
   bottom: 3.5rem; /* Same as other buttons */
-  left: 1rem; /* Align the support button all the way to the left */
+  left: 0.5rem; /* Align the support button all the way to the left */
   width: auto;
   padding: 10px 20px;
   background-color: transparent; /* Remove background color */
