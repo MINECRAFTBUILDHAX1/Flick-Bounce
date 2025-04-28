@@ -50,53 +50,50 @@ function updateBallPosition() {
 
 // Ball animation loop
 function animate() {
+  if (velocity.x === 0 && velocity.y === 0) return;
+
   const gameArea = document.getElementById('game-area');
   const friction = 0.98;
 
-  if (velocity.x !== 0 || velocity.y !== 0) {
-    // Update position
-    position.x += velocity.x;
-    position.y += velocity.y;
+  // Update position
+  position.x += velocity.x;
+  position.y += velocity.y;
 
-    // Check boundaries
-    const shopButtonRect = shopButton.getBoundingClientRect();
-    const gameAreaRect = gameArea.getBoundingClientRect();
+  // Check boundaries
+  const shopButtonRect = shopButton.getBoundingClientRect();
+  const gameAreaRect = gameArea.getBoundingClientRect();
 
-    if (position.x < 0) {
-      position.x = 0;
-      velocity.x = -velocity.x * 0.7;
-      ball.classList.add('bounce');
-    } else if (position.x > gameAreaRect.width - ball.clientWidth - shopButtonRect.width) {
-      position.x = gameAreaRect.width - ball.clientWidth - shopButtonRect.width;
-      velocity.x = -velocity.x * 0.7;
-      ball.classList.add('bounce');
-    }
-
-    if (position.y < 0) {
-      position.y = 0;
-      velocity.y = -velocity.y * 0.7;
-      ball.classList.add('bounce');
-    } else if (position.y > gameAreaRect.height - ball.clientHeight) {
-      position.y = gameAreaRect.height - ball.clientHeight;
-      velocity.y = -velocity.y * 0.7;
-      ball.classList.add('bounce');
-    }
-
-    // Apply friction
-    velocity.x *= friction;
-    velocity.y *= friction;
-
-    // Stop if velocity is very small
-    if (Math.abs(velocity.x) < 0.1) velocity.x = 0;
-    if (Math.abs(velocity.y) < 0.1) velocity.y = 0;
-
-    updateBallPosition();
+  if (position.x < 0) {
+    position.x = 0;
+    velocity.x = -velocity.x * 0.7;
+    ball.classList.add('bounce');
+  } else if (position.x > gameAreaRect.width - ball.clientWidth - shopButtonRect.width) {
+    position.x = gameAreaRect.width - ball.clientWidth - shopButtonRect.width;
+    velocity.x = -velocity.x * 0.7;
+    ball.classList.add('bounce');
   }
 
-  // 👇 Always keep animating even if no movement, so it catches new flicks immediately
+  if (position.y < 0) {
+    position.y = 0;
+    velocity.y = -velocity.y * 0.7;
+    ball.classList.add('bounce');
+  } else if (position.y > gameAreaRect.height - ball.clientHeight) {
+    position.y = gameAreaRect.height - ball.clientHeight;
+    velocity.y = -velocity.y * 0.7;
+    ball.classList.add('bounce');
+  }
+
+  // Apply friction
+  velocity.x *= friction;
+  velocity.y *= friction;
+
+  // Stop if velocity is very small
+  if (Math.abs(velocity.x) < 0.1) velocity.x = 0;
+  if (Math.abs(velocity.y) < 0.1) velocity.y = 0;
+
+  updateBallPosition();
   requestAnimationFrame(animate);
 }
-
 
 function updateGameState() {
   // Update score display
@@ -174,38 +171,35 @@ function handleEnd(event) {
   const dx = endX - startPos.x;
   const dy = endY - startPos.y;
 
-  // Use a softer multiplier for a smooth, casual swipe (not too fast needed)
-  const flickMultiplier = 0.03; // 🔥 Tiny boost for better feel
-
-  // Minimum distance to count as a flick (so taps don't move it randomly)
-  const minFlickDistance = 10; // 🎯 Small, but enough to not trigger by mistake
-
-  const distance = Math.sqrt(dx * dx + dy * dy);
-
-  if (distance > minFlickDistance) {
+  // Apply a smaller multiplier to make the flick feel smoother and more responsive
+  const flickMultiplier = 0.02; // Smaller multiplier for smoother flick
+  if (Math.abs(dx) > 2 || Math.abs(dy) > 2) {
     velocity = {
-      x: dx * flickMultiplier,
-      y: dy * flickMultiplier
+      x: dx * flickMultiplier,  // Reduced multiplier
+      y: dy * flickMultiplier   // Reduced multiplier
     };
 
-    // Limit max speed for better control
-    const maxVelocity = 6; // 🚀 Feels snappy but not chaotic
+    // Limit the max velocity to prevent the ball from moving too fast
+    const maxVelocity = 5;  // Max speed, can be adjusted for smoother results
     velocity.x = Math.max(Math.min(velocity.x, maxVelocity), -maxVelocity);
     velocity.y = Math.max(Math.min(velocity.y, maxVelocity), -maxVelocity);
 
+    // Increment flick count
     state.flicks++;
 
-    // Save flicks to localStorage
+    // Save flick count to localStorage
     localStorage.setItem('flickCount', state.flicks);
 
-    // Update UI
+    // Log the flick count for debugging
+    console.log('Flick count:', state.flicks);
+
+    // Update game state (score and progress bar)
     updateGameState();
 
-    // Start animating
+    // Start ball animation
     animate();
   }
 }
-
 
 
 
@@ -344,4 +338,3 @@ window.addEventListener('beforeinstallprompt', (e) => {
     });
   });
 });
-
