@@ -254,7 +254,7 @@ function updateBallSkin() {
     `;
     
     skinsGrid.appendChild(skinElement);
-  );
+  ;
 }
 
 // Event Listeners
