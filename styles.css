@@ -309,20 +309,27 @@ footer {
   z-index: 100;
 }
 
-/* Support Button */
+/* Support Button without the green box */
 .support-button {
   position: fixed;
   bottom: 3.5rem; /* Same as other buttons */
   left: 1rem; /* Align the support button all the way to the left */
   width: auto;
   padding: 10px 20px;
-  
-  color: white;
+  background-color: transparent; /* Remove background color */
+  color: #4CAF50; /* Green text */
+  border: none; /* Remove the border */
   border-radius: 5px;
   font-size: 14px;
   text-align: center;
   cursor: pointer;
+  box-shadow: none; /* Remove any shadow */
 }
+
+.support-button:hover {
+  background-color: #f1f1f1; /* Optional hover effect */
+}
+
 /* Animations */
 @keyframes bounce {
   0%, 100% { transform: scale(1); }
