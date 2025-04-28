@@ -128,14 +128,15 @@ function updateGameState() {
     document.querySelectorAll('.milestone-text')[1].textContent = state.nextMilestone;
   }
 
-  // Check for unlocking skins based on flicks
-  state.skins.forEach(skin => {
-    if (!skin.unlocked && state.flicks >= skin.requiredFlicks) {
-      skin.unlocked = true;
-      console.log(`${skin.name} unlocked!`);
-      renderShop(); // Refresh shop to show the unlocked skin
-    }
-  });
+// Check for unlocking skins based on flicks and auto-equip
+state.skins.forEach(skin => {
+  if (!skin.unlocked && state.flicks >= skin.requiredFlicks) {
+    skin.unlocked = true;
+    state.activeSkin = skin.id; // 🚀 AUTO EQUIP
+    console.log(`${skin.name} unlocked and equipped!`);
+  }
+});
+
 }
 
 
