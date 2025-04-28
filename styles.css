@@ -201,21 +201,16 @@ body {
 .close-button:hover {
   color: #374151;
 }
-
-/* Shop Grid */
-/* Shop Grid */
-/* Shop Grid */
 .skins-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.75rem;
-  max-height: 300px; /* Keeps the height fixed */
-  overflow-y: auto; /* Ensures vertical scrolling */
-  -webkit-overflow-scrolling: touch; /* Enables smooth scrolling on mobile */
+  max-height: 300px; /* You can adjust this to the height you want */
+  overflow-y: auto;  /* Allow vertical scrolling */
+  -webkit-overflow-scrolling: touch;  /* Smooth scrolling for iOS */
   padding-right: 1rem;
-  scrollbar-width: thin; /* For Firefox */
-  scrollbar-color: rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0); /* Customize the scroll color */
 }
+
 
 /* For webkit browsers (Chrome, Safari, Edge) */
 .skins-grid::-webkit-scrollbar {
