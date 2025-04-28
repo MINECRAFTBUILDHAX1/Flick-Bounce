@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flick Bounce</title>
   <link rel="icon" href="og-image.png">
-  <link rel="manifest" href="/Flick-Bounce/manifest.json">
-
+  <link rel="manifest" href="/manifest.json">
   <style>
     /* Reset and base styles */
     * {
@@ -61,7 +60,7 @@
       margin: 10px 0;
     }
 
-    .add-to-home-screen {
+    .add-to-home-btn {
       background-color: #111827;
       color: white;
       padding: 0.75rem 2rem;
@@ -71,8 +70,53 @@
       transition: background-color 0.2s;
     }
 
-    .add-to-home-screen:hover {
+    .add-to-home-btn:hover {
       background-color: #374151;
+    }
+
+    /* Instructions Popup */
+    .instructions-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      z-index: 1000;
+    }
+
+    .instructions-popup p {
+      margin-bottom: 15px;
+      font-size: 1.125rem;
+    }
+
+    .close-popup-btn {
+      background-color: #111827;
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 9999px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .close-popup-btn:hover {
+      background-color: #374151;
+    }
+
+    .popup-header {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .platform-instructions {
+      margin-bottom: 20px;
+      font-size: 1rem;
     }
   </style>
 </head>
@@ -83,37 +127,46 @@
       <img src="og-image.png" alt="Flick Bounce Logo" class="app-logo">
       <h1 class="landing-title">Welcome to Flick Bounce!</h1>
       <p class="landing-description">A fun, bouncing game that's simple to play and hard to put down.</p>
-
-      <!-- Visible "Add to Home Screen" Button -->
-      <button class="add-to-home-screen" id="add-to-home-screen">Add to Home Screen</button>
+      <button class="add-to-home-btn" id="add-to-home-btn">Add to Home Screen</button>
     </div>
   </div>
 
-  <script>
-    // Detect if the app is running on mobile devices and show the "Add to Home Screen" button
-    let deferredPrompt;
+  <!-- Instructions Popup -->
+  <div class="instructions-popup" id="instructions-popup">
+    <p class="popup-header">How to Add to Home Screen</p>
+    
+    <div class="platform-instructions">
+      <h3>For iPhone:</h3>
+      <p>1. Tap the Share button (the square with an arrow pointing up) at the bottom of the screen.</p>
+      <p>2. Scroll down and select "Add to Home Screen".</p>
+      <p>3. Tap "Add" in the upper-right corner to add the app to your home screen.</p>
+    </div>
+    
+    <div class="platform-instructions">
+      <h3>For Android:</h3>
+      <p>1. Tap the menu button (three dots) in the top-right corner of the browser.</p>
+      <p>2. Select "Add to Home Screen" from the dropdown menu.</p>
+      <p>3. Tap "Add" to place the app on your home screen.</p>
+    </div>
 
-    window.addEventListener('beforeinstallprompt', (e) => {
-      // Prevent the default prompt
-      e.preventDefault();
-      // Storing the event to trigger it later
-      deferredPrompt = e;
-      // Show the button
-      const addToHomeBtn = document.getElementById('add-to-home-btn');
-      addToHomeBtn.style.display = 'block'; // Ensure the button is visible
+    <button class="close-popup-btn" id="close-popup-btn">Got it!</button>
+  </div>
+
+  <script>
+    // Handle the "Add to Home Screen" behavior
+    const addToHomeBtn = document.getElementById('add-to-home-btn');
+    const instructionsPopup = document.getElementById('instructions-popup');
+    const closePopupBtn = document.getElementById('close-popup-btn');
+
+    // When the "Add to Home Screen" button is clicked
+    addToHomeBtn.addEventListener('click', () => {
+      // Show the instructions popup
+      instructionsPopup.style.display = 'block';
     });
 
-    const addToHomeBtn = document.getElementById('add-to-home-btn');
-
-    addToHomeBtn.addEventListener('click', () => {
-      // Show the native prompt for adding to home screen
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-          console.log(choiceResult.outcome); // 'accepted' or 'dismissed'
-          deferredPrompt = null; // Reset the prompt
-        });
-      }
+    // Close the instructions popup
+    closePopupBtn.addEventListener('click', () => {
+      instructionsPopup.style.display = 'none';
     });
   </script>
 </body>
