@@ -220,15 +220,21 @@ function handleEnd(event) {
 
 
 function updateBallSkin() {
-  const ball = document.getElementById('ball');
-  const activeSkinObj = state.skins.find(skin => skin.id === state.activeSkin);
-  
-  if (activeSkinObj) {
-    ball.textContent = activeSkinObj.icon; // USE TEXT, NOT IMAGE
-  } else {
-    console.error('Active skin not found!');
-  }
+  const ball = document.getElementById('ball'); // Your ball element
+  const activeSkinObj = state.skins.find(skin => skin.id === state.activeSkin); // Get the active skin object
+
+  // Set the ball's icon (emoji)
+  ball.textContent = activeSkinObj.icon;
+
+  // Add the 'pop' class to trigger the animation
+  ball.classList.add('pop');
+
+  // Remove the 'pop' class after animation completes so it can be triggered again next time
+  setTimeout(() => {
+    ball.classList.remove('pop');
+  }, 600); // Match this to the duration of the animation in CSS
 }
+
 
 
 
