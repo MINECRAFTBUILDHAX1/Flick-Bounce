@@ -212,6 +212,8 @@ body {
   overflow-y: auto;
   max-height: 60vh;
   padding-right: 1rem;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .skin-item {
