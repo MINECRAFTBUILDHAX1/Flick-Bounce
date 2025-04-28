@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flick Bounce</title>
+  <link rel="icon" href="og-image.png">
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      touch-action: none;
+      user-select: none;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f9fafb;
+    }
+
+    #game-area {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    /* Landing Page Content */
+    .landing-page {
+      text-align: center;
+    }
+
+    .app-logo {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 20px;
+    }
+
+    .landing-title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #111827;
+    }
+
+    .landing-description {
+      font-size: 1rem;
+      color: #6b7280;
+      margin: 10px 0;
+    }
+
+    .add-to-home-btn {
+      background-color: #111827;
+      color: white;
+      padding: 0.75rem 2rem;
+      border-radius: 9999px;
+      font-size: 1.125rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .add-to-home-btn:hover {
+      background-color: #374151;
+    }
+
+    /* Animations */
+    @keyframes pop {
+      0% { transform: translate(-50%, -50%) scale(0.95); opacity: 0; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div id="game-area">
+    <!-- Landing Page Content -->
+    <div class="landing-page">
+      <img src="og-image.png" alt="Flick Bounce Logo" class="app-logo">
+      <h1 class="landing-title">Welcome to Flick Bounce!</h1>
+      <p class="landing-description">A fun, bouncing game that's simple to play and hard to put down.</p>
+      <button class="add-to-home-btn" id="add-to-home-btn">Add to Home Screen</button>
+    </div>
+  </div>
+
+  <script>
+    // Service Worker Registration for PWA (Progressive Web App)
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(reg => console.log('Service Worker Registered:', reg))
+          .catch(err => console.log('Service Worker Registration Failed:', err));
+      });
+    }
+
+    // Handle the "Add to Home Screen" behavior
+    let deferredPrompt;
+    const addToHomeBtn = document.getElementById('add-to-home-btn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      addToHomeBtn.style.display = 'block'; // Show the button
+    });
+
+    addToHomeBtn.addEventListener('click', (e) => {
+      // Trigger the prompt to install the app
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the A2HS prompt');
+          } else {
+            console.log('User dismissed the A2HS prompt');
+          }
+          deferredPrompt = null;
+        });
+      }
+    });
+  </script>
+</body>
+</html>
