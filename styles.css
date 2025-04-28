@@ -205,22 +205,16 @@ body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.75rem;
-  max-height: 300px; /* Height of the popup */
-  overflow-y: scroll;  /* Allow scrolling */
+  max-height: 300px; /* You can adjust this to the height you want */
+  overflow-y: auto;  /* Allow vertical scrolling */
   -webkit-overflow-scrolling: touch;  /* Smooth scrolling for iOS */
   padding-right: 1rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 90%;
-  background-color: #fff;
-  z-index: 100;
 }
 
-/* Show scrollbar even on mobile (on iOS/Android/Webkit browsers) */
+
+/* For webkit browsers (Chrome, Safari, Edge) */
 .skins-grid::-webkit-scrollbar {
-  width: 8px;  /* Adjust the width as per your needs */
+  width: 8px;
 }
 
 .skins-grid::-webkit-scrollbar-thumb {
