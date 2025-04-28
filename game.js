@@ -118,13 +118,7 @@ function updateGameState() {
   
   progressFill.style.width = `${Math.min(100, progress)}%`; // Limit to 100%
 
-  // Check if new skins are unlocked based on flicks
-  state.skins.forEach(skin => {
-    if (!skin.unlocked && skin.requiredFlicks <= state.flicks) {
-      skin.unlocked = true;
-      alert(`New skin unlocked: ${skin.name}!`);
-    }
-  });
+  
 
   // Update milestones and progress bar values
   if (state.flicks >= state.nextMilestone) {
