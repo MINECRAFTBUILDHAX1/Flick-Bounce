@@ -2,7 +2,7 @@
 let state = {
   flicks: 0,
   activeSkin: 'ball',
-  
+  showShop: false,
   showHelp: false,
   currentMilestone: 0,
   nextMilestone: 100,
@@ -33,9 +33,11 @@ let state = {
 const ball = document.getElementById('ball');
 const scoreValue = document.querySelector('.score-value');
 const progressFill = document.querySelector('.progress-fill');
-
+const shopButton = document.getElementById('shop-button');
+const shopModal = document.getElementById('shop-modal');
 const helpButton = document.getElementById('help-button');
 const helpModal = document.getElementById('help-modal');
+const skinsGrid = document.querySelector('.skins-grid');
 
 // Ball movement
 let isDragging = false;
@@ -239,7 +241,20 @@ function updateBallSkin() {
 
 
 
-
+// Shop functions
+function renderShop() {
+  skinsGrid.innerHTML = '';
+  state.skins.forEach(skin => {
+    const skinElement = document.createElement('div');
+    skinElement.className = `skin-item${skin.id === state.activeSkin ? ' active' : ''}${!skin.unlocked ? ' locked' : ''}`;
+    
+    if (skin.unlocked) {
+      skinElement.onclick = () => {
+        state.activeSkin = skin.id;
+        ball.textContent = skin.icon;
+        renderShop();
+      };
+    }
     
     skinElement.innerHTML = `
       <div class="skin-icon">${skin.icon}</div>
@@ -254,8 +269,8 @@ function updateBallSkin() {
     `;
     
     skinsGrid.appendChild(skinElement);
-  ;
-
+  });
+}
 
 // Event Listeners
 ball.addEventListener('mousedown', handleStart);
@@ -267,7 +282,10 @@ document.addEventListener('touchmove', handleMove);
 document.addEventListener('mouseup', handleEnd);
 document.addEventListener('touchend', handleEnd);
 
-
+shopButton.addEventListener('click', () => {
+  state.showShop = true;
+  shopModal.classList.remove('hidden');
+  renderShop();
 });
 
 helpButton.addEventListener('click', () => {
@@ -289,9 +307,9 @@ document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
 
 document.querySelectorAll('.close-button').forEach(button => {
   button.addEventListener('click', () => {
-   
+    state.showShop = false;
     state.showHelp = false;
-  
+    shopModal.classList.add('hidden');
     helpModal.classList.add('hidden');
   });
 });
