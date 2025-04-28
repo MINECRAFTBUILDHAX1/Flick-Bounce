@@ -127,9 +127,7 @@ function updateGameState() {
     document.querySelector('.milestone-text').textContent = state.currentMilestone;
     document.querySelectorAll('.milestone-text')[1].textContent = state.nextMilestone;
 
-    // Optional: You can trigger some celebratory event here (visual cue or sound)
-    alert(`Milestone Reached: ${state.currentMilestone}! 🎉`);
-  }
+  
 for (const skin of state.skins) {
   if (!skin.unlocked && state.flicks >= skin.requiredFlicks) {
     skin.unlocked = true;
