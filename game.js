@@ -221,8 +221,15 @@ function handleEnd(event) {
 
 function updateBallSkin() {
   const ball = document.getElementById('ball');
-  ball.src = state.skins[state.activeSkin].image;
+  const activeSkinObj = state.skins.find(skin => skin.id === state.activeSkin);
+  
+  if (activeSkinObj) {
+    ball.textContent = activeSkinObj.icon; // USE TEXT, NOT IMAGE
+  } else {
+    console.error('Active skin not found!');
+  }
 }
+
 
 
 
