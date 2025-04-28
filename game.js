@@ -121,11 +121,14 @@ function updateGameState() {
   // Update milestones and progress bar values
   if (state.flicks >= state.nextMilestone) {
     state.currentMilestone = state.nextMilestone;
-    state.nextMilestone += 100;
+    state.nextMilestone += 100;  // You can adjust the milestone gap here
 
     // Update milestone text
     document.querySelector('.milestone-text').textContent = state.currentMilestone;
     document.querySelectorAll('.milestone-text')[1].textContent = state.nextMilestone;
+
+    // Optional: You can trigger some celebratory event here (visual cue or sound)
+    alert(`Milestone Reached: ${state.currentMilestone}! 🎉`);
   }
 
   // Check for unlocking skins based on flicks
