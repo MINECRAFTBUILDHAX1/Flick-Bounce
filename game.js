@@ -27,7 +27,7 @@ let state = {
   { id: 'golden_star', name: 'Golden Star', icon: '🌟', unlocked: false, requiredFlicks: 750000 },
   { id: 'crown', name: 'Crown', icon: '👑', unlocked: false, requiredFlicks: 1000000 }
 ];
-};
+
 
 // DOM Elements
 const ball = document.getElementById('ball');
